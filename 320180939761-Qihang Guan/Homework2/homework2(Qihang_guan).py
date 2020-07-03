@@ -7,25 +7,29 @@ __version__ = "v1.0"
 """
 from subprocess import Popen,PIPE
 from matplotlib import pyplot as plt
+class Homework:
+    def __init__(self):
+        self.data("D:\Git\linux-stable") #  The location of my git warehouse .
 
-ver = "v4.4"
-repo = r"D:\Git\linux-stable" #  The location of my git warehouse .
-cmd_tag = 'git tag -l ' + '"' + ver + '.*"'
-ver_time = Popen(cmd_tag, cwd=repo, stdout=PIPE)
-ver,res = ver_time.communicate()
+    def data(self,repo):
 
-y = ver.decode('latin').encode('utf8').decode('utf8').split("\n")
+        cmd_tag = 'git tag -l '
+        ver_time = Popen(cmd_tag, cwd=repo, stdout=PIPE)
+        ver,res = ver_time.communicate()
 
-print(y)
-x_time = []
-for i in y:
-    cmd_time = 'git log -1 --pretty=format:\"%cd\" ' + i
-    time = Popen(cmd_time, cwd=repo, stdout=PIPE).communicate()
-    x_time.append(x_time)
+        y = ver.decode('latin').encode('utf8').decode('utf8').split("\n")
+
+#  print(y)
+        x_time = []
+        for i in y:
+            cmd_time = 'git log -1 --pretty=format:\"%ct\" ' + i
+            time = Popen(cmd_time, cwd=repo, stdout=PIPE).communicate()
+            x_time.append(time)
 #  print(1) a small test to show the program can run to here
-
-plt.scatter(x_time,y)
-plt.title('Release order with time')
-plt.xlabel('x,time')
-plt.ylabel('y,release order')
-plt.show()
+        self.print(x_time,y)
+        def draw(x_time,y):
+            plt.scatter(x_time,y)
+            plt.title('Release order with time')
+            plt.xlabel('x,time')
+            plt.ylabel('y,release order')
+            plt.show()
