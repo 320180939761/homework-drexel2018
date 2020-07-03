@@ -19,7 +19,7 @@ y = ver.decode('latin').encode('utf8').decode('utf8').split("\n")
 print(y)
 x_time = []
 for i in y:
-    cmd_time = 'git log -1 --pretty=format:\"%ct\" ' + i
+    cmd_time = 'git log -1 --pretty=format:\"%cd\" ' + i
     time = Popen(cmd_time, cwd=repo, stdout=PIPE).communicate()
     x_time.append(x_time)
 #  print(1) a small test to show the program can run to here
